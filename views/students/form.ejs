@@ -1,0 +1,12 @@
+<%- include('../partials/header', { title: student.id ? 'Edit Student' : 'New Student' }) %>
+<h1><%= student.id ? 'Edit Student' : 'New Student' %></h1>
+<form action="<%= action %>" method="POST">
+  <label>Student ID:<br>
+    <input type="text" name="student_id" value="<%= student.student_id || '' %>" required>
+  </label><br>
+  <label>Full Name:<br>
+    <input type="text" name="full_name" value="<%= student.full_name || '' %>" required>
+  </label><br>
+  <button type="submit">Save</button>
+</form>
+<%- include('../partials/footer') %>

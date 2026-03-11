@@ -1,0 +1,44 @@
+<%- include('../partials/header', { title: 'Take Register' }) %>
+<h1>Register for <%= schedule.staff_name %> teaching <%= schedule.course_code %> - <%= schedule.course_title %> on <%= new Date(schedule.scheduled_at).toLocaleString() %></h1>
+<form id="attendance-form" action="<%= action %>" method="POST">
+<div id="attendance-app">
+  <table>
+    <thead><tr><th>Student</th><th>Present</th></tr></thead>
+    <tbody>
+      <% enrollments.forEach(function(e) { %>
+        <tr>
+          <td><%= e.student_name %></td>
+          <td>
+            <input type="checkbox" name="present" value="<%= e.enrollment_id %>" <%= attendanceMap[e.enrollment_id] ? 'checked' : '' %>>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <p>Present count: {{ presentCount }}</p>
+  <button type="submit">Save Attendance</button>
+</div>
+</form>
+<script>
+  new Vue({
+    el: '#attendance-app',
+    data: {
+      presentCount: 0
+    },
+    mounted() {
+      // initialize count
+      this.updateCount();
+      // attach change event
+      this.$el.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('change', () => this.updateCount());
+      });
+    },
+    methods: {
+      updateCount() {
+        const checked = this.$el.querySelectorAll('input[type=checkbox]:checked').length;
+        this.presentCount = checked;
+      }
+    }
+  });
+</script>
+<%- include('../partials/footer') %>

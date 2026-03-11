@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title: 'Schedules' }) %>
+<h1>Schedules</h1>
+<a href="/schedules/new">Add Schedule</a>
+<table>
+  <thead><tr><th>Staff</th><th>Course</th><th>Date/Time</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% schedules.forEach(function(s) { %>
+      <tr>
+        <td><%= s.staff_name %></td>
+        <td><%= s.course_code %> - <%= s.course_title %></td>
+        <td><%= new Date(s.scheduled_at).toLocaleString() %></td>
+        <td>
+          <a href="/schedules/<%= s.id %>/edit">Edit</a>
+          <form action="/schedules/<%= s.id %>/delete" method="POST" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+          <a href="/attendance/schedule/<%= s.id %>">Attendance</a>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

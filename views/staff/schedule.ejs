@@ -1,0 +1,11 @@
+<%- include('../partials/header', { title: person.full_name + ' Schedule' }) %>
+<h1>Schedule for <%= person.full_name %></h1>
+<ul>
+  <% schedules.forEach(function(s) { %>
+    <li>
+      <%= new Date(s.scheduled_at).toLocaleString() %> - <%= s.course_code %> <%= s.course_title %>
+      (<a href="/attendance/schedule/<%= s.id %>">register</a>)
+    </li>
+  <% }); %>
+</ul>
+<%- include('../partials/footer') %>

@@ -1,0 +1,15 @@
+<%- include('../partials/header', { title: 'Attendance' }) %>
+<h1>Attendance for schedule <%= scheduleId %></h1>
+<table>
+  <thead><tr><th>Student</th><th>Present</th></tr></thead>
+  <tbody>
+    <% attendance.forEach(function(a) { %>
+      <tr>
+        <td><%= a.student_name %></td>
+        <td><%= a.present ? '✔️' : '✖️' %></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<a href="/attendance/schedule/<%= scheduleId %>/register">Take register</a>
+<%- include('../partials/footer') %>

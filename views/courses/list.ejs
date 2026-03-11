@@ -1,0 +1,21 @@
+<%- include('../partials/header', { title: 'Courses' }) %>
+<h1>Courses</h1>
+<a href="/courses/new">Add Course</a>
+<table>
+  <thead><tr><th>Code</th><th>Title</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% courses.forEach(function(c) { %>
+      <tr>
+        <td><%= c.code %></td>
+        <td><%= c.title %></td>
+        <td>
+          <a href="/courses/<%= c.id %>/edit">Edit</a>
+          <form action="/courses/<%= c.id %>/delete" method="POST" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

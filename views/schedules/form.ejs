@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title: schedule.id ? 'Edit Schedule' : 'New Schedule' }) %>
+<h1><%= schedule.id ? 'Edit Schedule' : 'New Schedule' %></h1>
+<form action="<%= action %>" method="POST">
+  <label>Staff:<br>
+    <select name="staff_id" required>
+      <% staff.forEach(function(s) { %>
+        <option value="<%= s.id %>" <%= schedule.staff_id == s.id ? 'selected' : '' %>><%= s.full_name %></option>
+      <% }) %>
+    </select>
+  </label><br>
+  <label>Course:<br>
+    <select name="course_id" required>
+      <% courses.forEach(function(c) { %>
+        <option value="<%= c.id %>" <%= schedule.course_id == c.id ? 'selected' : '' %>><%= c.code %> - <%= c.title %></option>
+      <% }) %>
+    </select>
+  </label><br>
+  <label>Date and time:<br>
+    <input type="datetime-local" name="scheduled_at" value="<%= schedule.scheduled_at ? new Date(schedule.scheduled_at).toISOString().slice(0,16) : '' %>" required>
+  </label><br>
+  <button type="submit">Save</button>
+</form>
+<%- include('../partials/footer') %>

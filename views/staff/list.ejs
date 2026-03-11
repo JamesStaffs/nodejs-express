@@ -1,0 +1,22 @@
+<%- include('../partials/header', { title: 'Staff' }) %>
+<h1>Staff Members</h1>
+<a href="/staff/new">Add Staff</a>
+<table>
+  <thead><tr><th>Staff ID</th><th>Full Name</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% staff.forEach(function(s) { %>
+      <tr>
+        <td><%= s.staff_id %></td>
+        <td><%= s.full_name %></td>
+        <td>
+          <a href="/staff/<%= s.id %>/edit">Edit</a> |
+          <a href="/staff/<%= s.id %>/schedule">Schedule</a> |
+          <form action="/staff/<%= s.id %>/delete" method="POST" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

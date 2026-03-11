@@ -1,0 +1,20 @@
+<%- include('../partials/header', { title: enrollment.id ? 'Edit Enrollment' : 'New Enrollment' }) %>
+<h1><%= enrollment.id ? 'Edit Enrollment' : 'New Enrollment' %></h1>
+<form action="<%= action %>" method="POST">
+  <label>Student:<br>
+    <select name="student_id" required>
+      <% students.forEach(function(s) { %>
+        <option value="<%= s.id %>" <%= enrollment.student_id == s.id ? 'selected' : '' %>><%= s.full_name %></option>
+      <% }) %>
+    </select>
+  </label><br>
+  <label>Course:<br>
+    <select name="course_id" required>
+      <% courses.forEach(function(c) { %>
+        <option value="<%= c.id %>" <%= enrollment.course_id == c.id ? 'selected' : '' %>><%= c.code %> - <%= c.title %></option>
+      <% }) %>
+    </select>
+  </label><br>
+  <button type="submit">Save</button>
+</form>
+<%- include('../partials/footer') %>
